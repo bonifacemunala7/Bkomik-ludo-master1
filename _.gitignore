@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+*.log
+.venv/
+venv/
+.buildozer/
+bin/
+.buildozer/
+*.keystore
+*.jks
+local.properties
+stats.json
+*.tmp
