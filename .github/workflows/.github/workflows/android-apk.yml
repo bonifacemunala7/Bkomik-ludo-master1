@@ -1,0 +1,52 @@
+
+name: Build BKOMIK Ludo Android APK
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-android:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check Python source
+        run: |
+          python -m py_compile main.py
+          python tests/test_release_checks.py -v
+
+      - name: Accept Android SDK licenses
+        run: |
+          if ! grep -q '^android.accept_sdk_license' buildozer.spec; then
+            sed -i '/^android.api = /a android.accept_sdk_license = True' buildozer.spec
+          fi
+
+      - name: Build APK with Buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1
+        id: buildozer
+        with:
+          workdir: .
+          buildozer_version: stable
+          command: buildozer android debug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: BKOMIK-Ludo-Android-APK
+          path: ${{ steps.buildozer.outputs.filename }}
+          if-no-files-found: error
+          
