@@ -16,7 +16,7 @@ fullscreen = 0
 # TCP sockets for local Wi-Fi multiplayer.
 android.permissions = INTERNET,ACCESS_NETWORK_STATE
 android.api = 35
-android.minapi = 23
+android.minapi = 24
 android.accept_sdk_license = True
 android.archs = arm64-v8a, armeabi-v7a
 
