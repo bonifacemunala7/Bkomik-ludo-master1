@@ -10,6 +10,7 @@ source.include_exts = py,png,jpg,jpeg,kv,atlas,txt,md
 version = 1.0.0
 
 requirements = python3,kivy
+p4a.branch = develop
 orientation = portrait
 fullscreen = 0
 
