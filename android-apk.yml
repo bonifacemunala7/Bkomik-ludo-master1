@@ -72,3 +72,4 @@ jobs:
           name: BKOMIK-Ludo-Android-APK
           path: bin/*.apk
           if-no-files-found: error
+          
